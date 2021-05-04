@@ -1,0 +1,80 @@
+  <div class="container col-md-6">
+    <h2 class="modal-header title">Nuevo Destinatario</h2>
+    <div class="progress" *ngIf="isLoading">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+      </div>
+      <form [formGroup]="registrationForm" (ngSubmit)="registrarDestinatario()" class="row g-2">
+  
+        <div class="form-group col-md-6">
+            <label for="rut" class="form-label">Rut</label>
+            <input type="text" class="form-control" id="rut" formControlName="rut" required>
+            <span style="color:red" *ngIf="registrationForm?.controls['rut'].touched && registrationForm?.controls['rut'].errors?.required">
+                <small>El Rut es requerido</small> 
+              </span>            
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" formControlName="name" required>
+            <span style="color:red" *ngIf="registrationForm?.controls['name'].touched && registrationForm?.controls['name'].errors?.required">
+                <small>El nombre es requerido</small> 
+              </span>
+        </div>
+        
+        <div class="form-group col-md-6">
+            <label for="InputEmail" class="form-label">Mail</label>
+            <input type="email" class="form-control" id="InputEmail" formControlName="email" aria-describedby="emailHelp">
+            <span style="color:red" *ngIf="registrationForm?.controls['email'].touched && registrationForm?.controls['email'].errors?.required">
+                <small>El correo electrónico es requerido</small> 
+            </span>
+            <p id="emailHelp" class="form-text"><small>Nunca se compartirá este correo con ninguna persona</small></p>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="phoneNumber" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" required>
+            <span style="color:red" *ngIf="registrationForm?.controls['phoneNumber'].touched && registrationForm?.controls['phoneNumber'].errors?.required">
+                <small>El número telefónico es requerido</small> 
+              </span>
+        </div>   
+        
+        <div class="form-group col-md-6">
+            <label for="bankName" class="form-label">Banco</label>
+            <select class="form-select form-control" id="bankName" formControlName="bankName">
+                <option *ngFor="let c of listBanks" value="{{c.name}}">{{c.name}}</option>
+            </select>            
+            <span style="color:red" *ngIf="registrationForm?.controls['bankName'].touched && registrationForm?.controls['bankName'].errors?.required">
+                <small>El nombre del Banco es requerido</small> 
+            </span>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="accountType" class="form-label">Tipo de cuenta</label>
+            <select class="form-select form-control" id="accountType" formControlName="accountType">
+                <option value="Cuenta Corriente">Cuenta Corriente</option>
+                <option value="Cuenta Ahorro">Cuenta Ahorro</option>
+                <option value="Cuenta Vista">Cuenta Vista</option>
+                <option value="Cuenta Rut">Cuenta Rut</option>
+              </select>         
+            <span style="color:red" *ngIf="registrationForm?.controls['accountType'].touched && registrationForm?.controls['accountType'].errors?.required">
+                <small>El tipo de cuenta es requerido</small>
+            </span>
+        </div>        
+
+       <div class="form-group col-md-6">
+            <label for="accountNumber" class="form-label">Número de cuenta</label>
+            <input type="text" class="form-control" id="accountNumber" formControlName="accountNumber">
+            <span style="color:red" *ngIf="registrationForm?.controls['accountNumber'].touched && registrationForm?.controls['accountNumber'].errors?.required">
+                <small>El número de cuenta es requerido</small> 
+            </span>
+        </div>          
+
+        <div class="modal-footer col-md-12">
+            <button type="submit" class="btn btn-primary btn-sm" [disabled]="registrationForm?.invalid" >Registrar</button>
+            <button type="button" class="btn btn-secondary btn-sm" (click)='clearForm()'>Limpiar</button>
+        </div>
+        </form>
+  </div>
+  
+  
+  

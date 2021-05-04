@@ -1,0 +1,63 @@
+<div class="container col-md-6">
+    <h2 class="modal-header">Transferir</h2>
+    <div class="progress" *ngIf="isLoading">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+      </div>
+    <form [formGroup]="registrationForm" (ngSubmit)="registrarTransferencia()" class="row g-2">
+
+        <div class="form-group col-md-12">
+            <label for="searchName" class="form-label">Destinatario</label>
+            <input type="text" class="form-control" list="detailRut" id="searchName" formControlName="searchName" (change)="getSelectedDestinatarioByRut($event)" placeholder="Ingrese el Rut del Destinatario">
+            <datalist id="detailRut">
+                <option *ngFor="let c of listDestinatarios" [value]="c.rut"></option>
+            </datalist>            
+            <span style="color:red" *ngIf="registrationForm?.controls['searchName'].touched && registrationForm?.controls['searchName'].errors?.required">
+                <small>Rut del Destinatario es requerido</small> 
+            </span>
+        </div>
+
+        <div class="form-group col-md-12">
+            <h4 class="title">Detalle Destinatario</h4>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" formControlName="name" readonly>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="InputEmail" class="form-label">Mail</label>
+            <input type="email" class="form-control" id="InputEmail" formControlName="email" readonly>
+        </div>
+        
+        <div class="form-group col-md-6">
+            <label for="bankName" class="form-label">Banco</label>
+            <input type="text" class="form-control" id="bankName" formControlName="bankName" readonly>
+        </div> 
+        
+        <div class="form-group col-md-6">
+            <label for="accountType" class="form-label">Tipo de cuenta</label>
+            <input type="text" class="form-control" id="accountType" formControlName="accountType" readonly>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="amount" class="form-label">Monto</label>
+            <input type="text" class="form-control" id="amount" formControlName="amount">
+            <span style="color:red" *ngIf="registrationForm?.controls['amount'].touched && registrationForm?.controls['amount'].errors?.required">
+                <small>El Monto de la transferencia es requerido</small> 
+            </span>
+            <span style="color:red" *ngIf="registrationForm?.controls['amount'].touched && registrationForm?.controls['amount'].errors?.pattern">
+                <small>Ingrese un Monto valido</small> 
+            </span>            
+        </div>        
+      
+        <div class="modal-footer col-md-12">
+            <button type="submit" class="btn btn-primary btn-sm" [disabled]="registrationForm?.controls['name'].errors?.required || registrationForm?.controls['amount'].errors?.required" >Registrar</button>
+            <button type="button" class="btn btn-secondary btn-sm" (click)='clearForm()'>Limpiar</button>
+        </div>
+  
+    </form>
+</div>
+  
+  
+  
