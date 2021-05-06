@@ -1,9 +1,8 @@
+import { environment } from "../../environments/environment"
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-
-const baseUrl = "http://localhost:5000/api";
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +13,11 @@ export class UserService {
               private router : Router) { }
 
   registrar(data): Observable<any> {
-    return this.http.post(baseUrl + "/user/signup", data);
+    return this.http.post(environment.baseUrl + "/user/signup", data);
   }
 
   ingresar(data): Observable<any> {
-    return this.http.post(baseUrl + "/user/login", data);
+    return this.http.post(environment.baseUrl + "/user/login", data);
   }
 
   usuarioIngresado() {
